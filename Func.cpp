@@ -1,5 +1,31 @@
 #include "Func.h"
 
+void create_list(Node*& L, int n)
+{
+	Node *q, *q1 = nullptr;
+	cout << "Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ñ‡Ð¸ÑÐµÐ» Ð´Ð»Ñ " << n << " ÑƒÐ·Ð»Ð¾Ð²:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		q = new Node;
+		while(true)
+		{
+			int temp = rand() % 100;
+			if (isdigit(temp)) 
+			{
+				q->number = temp;
+				break;
+			}
+		}
+		q->next = nullptr;
+		if (L == NULL) L = q;
+		else
+		{
+			q1->next = q;
+		}
+		q1 = q;
+	}
+}
+
 Node* findByPos(Node* L, int pos)
 {
 	if (pos < 1) return 0;
@@ -11,88 +37,20 @@ Node* findByPos(Node* L, int pos)
 	return q;
 }
 
-void create_list(Node*& L, int n)
-{
-	Node* q, * q1 = nullptr;
-	cout << "Çíà÷åíèÿ ÷èñåë äëÿ " << n << " óçëîâ:\n";
-	for (int i = 1; i <= n; i++)
-	{
-		q = new Node;
-		q->number = 100 / i * pow(-1, i + i / 3);
-		q->next = nullptr;
-		if (L == NULL) L = q;
-		else 
-		{
-			q1->next = q;
-		}
-		q1 = q;
-	}
-}
-
-void sort_list(Node*& L)
-{
-	if (!L) return;
-	int p = findMinLowestDigitPos(L);
-	Node* node = findByPos(L, p);
-	if (p > 1) findByPos(L, p - 1)->next = node->next;
-	else L = node->next;
-	Node* L2 = node;
-	Node* pasteTo = L2;
-	while (true) {
-		p = findMinLowestDigitPos(L);
-		node = findByPos(L, p);
-		if (!node) break;
-		if (p > 1) findByPos(L, p - 1)->next = node->next;
-		else L = node->next;
-		pasteTo->next = node;
-		pasteTo = node;
-	}
-	L = L2;
-}
-
-int findMinLowestDigitPos(Node* L, int startFrom) 
-{
-	if (startFrom < 1) startFrom = 1;
-	Node* q = L;
-	int min = INT_MAX;
-	int p = -1;
-	for (int i = 1; i < startFrom; i++)
-	{
-		q = q->next;
-	}
-	for (int i = startFrom; q != 0; i++, q = q->next) 
-	{
-		if (abs(q->number % 10) < min || i == 1) 
-		{
-			min = abs(q->number % 10);
-			p = i;
-		}
-	}
-	return p;
-}
-
 void print(Node* L) 
 {
 	if (!L) {
-		cout << "Ñïèñîê ïóñò!\n";
+		cout << "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð¿ÑƒÑÑ‚!\n";
 		return;
 	}
 	Node* q = L;
-	for (int i = 1; q; i++, q = q->next) {//ïîêà íå íàéä¸ì NULL â ïîñëåäíåì óçëå
+	for (int i = 1; q; i++, q = q->next) {//Ð¿Ð¾ÐºÐ° Ð½Ðµ Ð½Ð°Ð¹Ð´Ñ‘Ð¼ NULL Ð² Ð¿Ð¾ÑÐ»ÐµÐ´Ð½ÐµÐ¼ ÑƒÐ·Ð»Ðµ
 		if (i > 1) cout << " ";
 		cout << q->number;
 	}
 	cout << endl;
 }
 
-bool isSorted(Node* L) 
-{
-	for (int i = 1, p = findMinLowestDigitPos(L, i); p > 0; i++, p = findMinLowestDigitPos(L, i))
-	{
-		if (i != p) return false;
-	}
-	return true;
-}
 
 int deleteByPos(Node*& L, int p)
 {
@@ -108,7 +66,7 @@ int deleteByPos(Node*& L, int p)
 	if (q1 != 0)
 	{
 		q = q1->next;
-		if (q != 0) {//åñòü óäàëÿåìûé îáúåêò
+		if (q != 0) {//ÐµÑÑ‚ÑŒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ñ‹Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚
 			q1->next = q->next;
 			delete q;
 			return 0;
@@ -117,33 +75,4 @@ int deleteByPos(Node*& L, int p)
 	return -1;
 }
 
-//#include "Func.h"
-//
-//void FillList(const char *L)
-//{
-//	string inp;
-//	cin >> inp;
-//	L = strdup(inp);
-//}
-//
-//void OutArr(const char* L)
-//{
-//
-//	for (int i = 0; i < strlen(L); i++)
-//	{
-//		cout << L[i];
-//	}
-//	cout << "\n";
-//}
-//
-//void LastInBegin(char*& Arr, int& n)
-//{
-//	char* temp = new char[n];
-//	temp[0] = Arr[n - 1];
-//	for (int i = 0; i < n; i++)
-//	{
-//		i++;
-//		temp[i - 1] = Arr[i];
-//	}
-//	Arr = temp;
-//}
+
