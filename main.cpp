@@ -13,12 +13,19 @@ int main()
 
 	create_list(L, n);
 	cout << "Список:\n";
-	print(L);
+	printL(L);
 
 	cout << "Удаление узла с позицией 2\n";
 	deleteByPos(L, 2);
-	print(L);
+	printL(L);
 
+	cout << "Перенос последнего элемента в начало списка:\n";
+	LastToFirst(L);
+	printL(L);
+
+	cout << "Замена k-ого слова на новое\n";
+	ChangeK(L);
+	printL(L);
 	system("pause");
 	return 0;
 }
