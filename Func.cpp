@@ -1,5 +1,31 @@
 #include "Func.h"
 
+void create_list(Node*& L, int n)
+{
+	Node *q, *q1 = nullptr;
+	cout << "Значения чисел для " << n << " узлов:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		q = new Node;
+		while(true)
+		{
+			int temp = rand() % 100;
+			if (isdigit(temp)) 
+			{
+				q->number = temp;
+				break;
+			}
+		}
+		q->next = nullptr;
+		if (L == NULL) L = q;
+		else
+		{
+			q1->next = q;
+		}
+		q1 = q;
+	}
+}
+
 Node* findByPos(Node* L, int pos)
 {
 	if (pos < 1) return 0;
@@ -9,24 +35,6 @@ Node* findByPos(Node* L, int pos)
 		q = q->next;
 	}
 	return q;
-}
-
-void create_list(Node*& L, int n)
-{
-	Node* q, * q1 = nullptr;
-	cout << "Значения чисел для " << n << " узлов:\n";
-	for (int i = 1; i <= n; i++)
-	{
-		q = new Node;
-		q->number = 100 / i * pow(-1, i + i / 3);
-		q->next = nullptr;
-		if (L == NULL) L = q;
-		else 
-		{
-			q1->next = q;
-		}
-		q1 = q;
-	}
 }
 
 void print(Node* L) 
@@ -67,33 +75,4 @@ int deleteByPos(Node*& L, int p)
 	return -1;
 }
 
-//#include "Func.h"
-//
-//void FillList(const char *L)
-//{
-//	string inp;
-//	cin >> inp;
-//	L = strdup(inp);
-//}
-//
-//void OutArr(const char* L)
-//{
-//
-//	for (int i = 0; i < strlen(L); i++)
-//	{
-//		cout << L[i];
-//	}
-//	cout << "\n";
-//}
-//
-//void LastInBegin(char*& Arr, int& n)
-//{
-//	char* temp = new char[n];
-//	temp[0] = Arr[n - 1];
-//	for (int i = 0; i < n; i++)
-//	{
-//		i++;
-//		temp[i - 1] = Arr[i];
-//	}
-//	Arr = temp;
-//}
+
