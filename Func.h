@@ -16,10 +16,7 @@ struct Node {
 
 Node* findByPos(Node* L, int pos);
 void create_list(Node*& L, int n);
-void sort_list(Node*& L);
-int findMinLowestDigitPos(Node* L, int startFrom = 1);
 void print(Node* L);
-bool isSorted(Node* L);
 int deleteByPos(Node*&, int);
 
 #endif
