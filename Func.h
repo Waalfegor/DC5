@@ -13,10 +13,13 @@ struct Node {
 	Node* next;
 };
 
-
-Node* findByPos(Node* L, int pos);
+int SizeL(Node*& L);
 void create_list(Node*& L, int n);
-void print(Node* L);
+void printL(Node* L);
+Node* findByPos(Node* L, int pos);
 int deleteByPos(Node*&, int);
+void LastToFirst(Node*& L);
+void ChangeK(Node*& L);
+
 
 #endif
