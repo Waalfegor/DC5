@@ -1,6 +1,6 @@
 #include "Func.h"
 
-void create_list(Node*& L, int n)
+void create_list(Node *&L, int n)
 {
 	Node *q, *q1 = nullptr;
 	cout << "Значения чисел для " << n << " узлов:\n";
@@ -26,18 +26,21 @@ void create_list(Node*& L, int n)
 	}
 }
 
-Node* findByPos(Node* L, int pos)
+void LastToFirst(Node*& L)
 {
-	if (pos < 1) return 0;
-	Node* q = L;
-	for (int i = 1; q != 0 && i < pos; i++)
+	Node* LastOne = nullptr;
+	Node* FirstOne = L;
+	while (FirstOne->next)
 	{
-		q = q->next;
+		LastOne = FirstOne;
+		FirstOne = FirstOne->next;
 	}
-	return q;
+	LastOne->next = 0;
+	FirstOne->next = L;
+	L = FirstOne;
 }
 
-void print(Node* L) 
+void printL(Node* L) 
 {
 	if (!L) {
 		cout << "Список пуст!\n";
@@ -51,6 +54,15 @@ void print(Node* L)
 	cout << endl;
 }
 
+Node* findByPos(Node* L, int pos)
+{
+	if (pos < 1) return 0;
+	Node* q = L;
+	for (int i = 1; q != 0 && i < pos; i++) {
+		q = q->next;
+	}
+	return q;
+}
 
 int deleteByPos(Node*& L, int p)
 {
@@ -75,4 +87,27 @@ int deleteByPos(Node*& L, int p)
 	return -1;
 }
 
+int SizeL(Node *&L)
+{
+	int tempSize = 0;
+	Node* q = L;
+	for (int i = 1; q; i++, q = q->next) //пока не найдём NULL в последнем узле
+	{
+		tempSize++;
+	}
+	return tempSize;
+}
 
+void ChangeK(Node*& L)
+{
+	Node* k = findByPos(L, rand() % SizeL(L));
+	while (true)
+	{
+		int temp = rand() % 100;
+		if (isdigit(temp) && k->number != temp)
+		{
+			k->number = temp;
+			break;
+		}
+	}
+}
